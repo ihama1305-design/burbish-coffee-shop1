@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Burbish Payment | Burbish Coffee Shop</title>
+    <meta name="theme-color" content="#3a0710">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+  </head>
+  <body class="flow-page">
+    <div class="utility-bar" aria-label="Quick contact">
+      <div class="utility-inner">
+        <a href="tel:+971501212460">Call Us</a>
+        <a href="https://wa.me/971501212460" target="_blank" rel="noreferrer">Message Us</a>
+      </div>
+      <p>Secure payment redirect</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Payment navigation">
+      <a class="brand-mark" href="index.html" data-smooth-page>
+        <span>Burbish</span>
+        <small>Coffee Shop</small>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" data-smooth-page>Home</a>
+        <a href="delivery.html" data-smooth-page>Delivery</a>
+        <a href="index.html#menu" data-smooth-page>Menu</a>
+        <a href="index.html#location" data-smooth-page>Location</a>
+      </div>
+      <div class="nav-controls">
+        <div class="language-toggle" aria-label="Language">
+          <button class="language-option is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="language-option" type="button" data-lang="ar" aria-pressed="false">AR</button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <p class="eyebrow">Payment Page</p>
+        <h1>Choose a secure way to pay.</h1>
+        <p>This page is structured for redirecting customers to a hosted checkout from Stripe, PayTabs, Telr, Network, or a bank payment link. It does not collect raw card numbers.</p>
+      </div>
+    </header>
+
+    <main class="flow-section">
+      <div class="flow-grid">
+        <section class="flow-card">
+          <h2>Payment options</h2>
+          <div class="pay-method-grid">
+            <article class="pay-card">
+              <div>
+                <strong>Visa</strong>
+                <p>Redirect to hosted card checkout.</p>
+              </div>
+              <a class="button primary" href="https://wa.me/971501212460?text=Hello%20Burbish%2C%20please%20send%20me%20a%20Visa%20payment%20link." target="_blank" rel="noreferrer">Pay by Visa</a>
+            </article>
+            <article class="pay-card">
+              <div>
+                <strong>Mastercard</strong>
+                <p>Redirect to hosted card checkout.</p>
+              </div>
+              <a class="button primary" href="https://wa.me/971501212460?text=Hello%20Burbish%2C%20please%20send%20me%20a%20Mastercard%20payment%20link." target="_blank" rel="noreferrer">Pay by Mastercard</a>
+            </article>
+            <article class="pay-card">
+              <div>
+                <strong>Apple Pay</strong>
+                <p>Redirect to wallet-enabled checkout.</p>
+              </div>
+              <a class="button primary" href="https://wa.me/971501212460?text=Hello%20Burbish%2C%20please%20send%20me%20an%20Apple%20Pay%20checkout%20link." target="_blank" rel="noreferrer">Use Apple Pay</a>
+            </article>
+            <article class="pay-card">
+              <div>
+                <strong>Google Pay</strong>
+                <p>Redirect to wallet-enabled checkout.</p>
+              </div>
+              <a class="button primary" href="https://wa.me/971501212460?text=Hello%20Burbish%2C%20please%20send%20me%20a%20Google%20Pay%20checkout%20link." target="_blank" rel="noreferrer">Use Google Pay</a>
+            </article>
+          </div>
+        </section>
+
+        <aside class="flow-card">
+          <h3>Checkout notes</h3>
+          <p>For a live website, these buttons should point to a backend-generated hosted checkout URL. That provider handles card security, Apple Pay, Google Pay, receipts, and payment confirmation.</p>
+          <div class="secure-note">
+            <strong>Do not collect card numbers on this static page.</strong>
+            <p>Hosted checkout keeps payment data outside the website and protects the customer experience.</p>
+          </div>
+          <div class="order-actions">
+            <a class="button secondary" href="delivery.html" data-smooth-page>Back to delivery</a>
+            <a class="button ghost" href="index.html#order" data-smooth-page>Back to order</a>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <p>Burbish Coffee Shop</p>
+        <small>Secure payment flow</small>
+      </div>
+    </footer>
+  </body>
+</html>

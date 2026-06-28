@@ -14,8 +14,12 @@ const orderForm = document.querySelector("#orderForm");
 const orderSummary = document.querySelector("#orderSummary");
 const whatsappOrder = document.querySelector("#whatsappOrder");
 const cartBadge = document.querySelector(".cart-button span");
+const selectedItemName = document.querySelector("#selectedItemName");
+const selectedItemMeta = document.querySelector("#selectedItemMeta");
+const selectedItemImage = document.querySelector("#selectedItemImage");
 
 let selectedPayment = "Visa through secure checkout";
+let selectedOrderItem = selectedItemName?.textContent?.trim() || "Fresh cocktails";
 
 const translations = {
   en: {
@@ -95,7 +99,7 @@ const translations = {
     "payment.copy": "Customers can pay with Visa, Mastercard, Apple Pay, Google Pay, or cash after a secure checkout provider is connected.",
     "payment.summaryTitle": "Order summary",
     "payment.summaryEmpty": "Select a service mode and prepare an order to see the summary here.",
-    "payment.checkout": "Request secure checkout link",
+    "payment.checkout": "Continue to payment page",
     "pages.eyebrow": "Brand Pages",
     "pages.title": "Explore every part of Burbish.",
     "pages.copy": "Use the sidebar or the buttons below to move through offers, party orders, tracking, policies, and customer support pages.",
@@ -223,7 +227,7 @@ const translations = {
     "payment.copy": "يمكن للعملاء الدفع بفيزا، ماستركارد، Apple Pay، Google Pay، أو نقدا بعد ربط مزود دفع آمن.",
     "payment.summaryTitle": "ملخص الطلب",
     "payment.summaryEmpty": "اختر طريقة الخدمة وجهز الطلب لعرض الملخص هنا.",
-    "payment.checkout": "طلب رابط دفع آمن",
+    "payment.checkout": "الانتقال إلى صفحة الدفع",
     "pages.eyebrow": "صفحات العلامة",
     "pages.title": "استكشف كل جزء من بربيش.",
     "pages.copy": "استخدم القائمة الجانبية أو الأزرار للتنقل بين العروض، طلبات المناسبات، التتبع، السياسات، وخدمة العملاء.",
@@ -441,6 +445,35 @@ function setServiceMode(mode) {
   if (radio) radio.checked = true;
 }
 
+function smoothPageTo(url) {
+  document.body.classList.add("is-leaving");
+  window.setTimeout(() => {
+    window.location.href = url;
+  }, 180);
+}
+
+function selectOrderItem(button) {
+  const item = button.dataset.orderItem || button.textContent.trim();
+  const category = button.dataset.orderCategory || "";
+  const image = button.dataset.orderImage || "";
+  selectedOrderItem = item;
+
+  if (selectedItemName) selectedItemName.textContent = item;
+  if (selectedItemMeta) selectedItemMeta.textContent = category;
+  if (selectedItemImage && image) {
+    selectedItemImage.src = image;
+    selectedItemImage.alt = item;
+  }
+
+  const itemsField = document.querySelector("[name='orderItems']");
+  if (itemsField && !itemsField.value.trim()) {
+    itemsField.value = item;
+  }
+
+  const picker = button.closest(".menu-picker");
+  if (picker) picker.open = false;
+}
+
 function prepareOrder() {
   if (!orderForm || !orderSummary || !whatsappOrder) return;
 
@@ -448,14 +481,17 @@ function prepareOrder() {
   const mode = formData.get("orderMode") || "Delivery";
   const name = formData.get("customerName") || "Guest";
   const phone = formData.get("customerPhone") || "";
+  const area = formData.get("customerArea") || "";
+  const building = formData.get("customerBuilding") || "";
   const address = formData.get("customerAddress") || "";
   const items = formData.get("orderItems") || "";
+  const notes = formData.get("orderNotes") || "";
   const payment = selectedPayment;
   const lang = currentLanguage();
 
   const summary = lang === "ar"
-    ? `طريقة الطلب: ${mode}\nالدفع: ${payment}\nالاسم: ${name}\nالهاتف: ${phone || "غير مضاف"}\nالعنوان: ${address || "غير مضاف"}\nالطلبات: ${items || "غير مضافة"}`
-    : `Order mode: ${mode}\nPayment: ${payment}\nName: ${name}\nPhone: ${phone || "Not added"}\nAddress: ${address || "Not added"}\nItems: ${items || "Not added"}`;
+    ? `طريقة الطلب: ${mode}\nالعنصر المختار: ${selectedOrderItem}\nالدفع: ${payment}\nالاسم: ${name}\nالهاتف: ${phone || "غير مضاف"}\nالمنطقة: ${area || "غير مضافة"}\nالمبنى: ${building || "غير مضاف"}\nالعنوان: ${address || "غير مضاف"}\nالطلبات: ${items || "غير مضافة"}\nالملاحظات: ${notes || "لا توجد"}`
+    : `Order mode: ${mode}\nSelected item: ${selectedOrderItem}\nPayment: ${payment}\nName: ${name}\nPhone: ${phone || "Not added"}\nArea: ${area || "Not added"}\nBuilding: ${building || "Not added"}\nAddress: ${address || "Not added"}\nItems: ${items || "Not added"}\nNotes: ${notes || "None"}`;
 
   orderSummary.textContent = summary;
   whatsappOrder.href = `https://wa.me/971501212460?text=${encodeURIComponent(`Hello Burbish, I would like to place an order.\n\n${summary}`)}`;
@@ -606,6 +642,11 @@ document.querySelectorAll(".drawer-menu a:not([data-page-target])").forEach((lin
 
 serviceButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (button.dataset.servicePage) {
+      smoothPageTo(button.dataset.servicePage);
+      return;
+    }
+
     setServiceMode(button.dataset.serviceMode);
     document.querySelector("#order")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -620,6 +661,19 @@ document.querySelectorAll(".payment-option").forEach((button) => {
     selectedPayment = button.dataset.payment || button.textContent.trim();
     document.querySelectorAll(".payment-option").forEach((item) => item.classList.remove("is-active"));
     button.classList.add("is-active");
+  });
+});
+
+document.querySelectorAll("[data-order-item]").forEach((button) => {
+  button.addEventListener("click", () => selectOrderItem(button));
+});
+
+document.querySelectorAll("[data-smooth-page]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) return;
+    event.preventDefault();
+    smoothPageTo(href);
   });
 });
 

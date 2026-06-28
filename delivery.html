@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Burbish Delivery | Burbish Coffee Shop</title>
+    <meta name="theme-color" content="#3a0710">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+  </head>
+  <body class="flow-page">
+    <div class="utility-bar" aria-label="Quick contact">
+      <div class="utility-inner">
+        <a href="tel:+971501212460">Call Us</a>
+        <a href="https://wa.me/971501212460" target="_blank" rel="noreferrer">Message Us</a>
+      </div>
+      <p>Delivery details</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Delivery navigation">
+      <a class="brand-mark" href="index.html" data-smooth-page>
+        <span>Burbish</span>
+        <small>Coffee Shop</small>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" data-smooth-page>Home</a>
+        <a href="index.html#menu" data-smooth-page>Menu</a>
+        <a href="payment.html" data-smooth-page>Payment</a>
+        <a href="index.html#location" data-smooth-page>Location</a>
+      </div>
+      <div class="nav-controls">
+        <div class="language-toggle" aria-label="Language">
+          <button class="language-option is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="language-option" type="button" data-lang="ar" aria-pressed="false">AR</button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <p class="eyebrow">Delivery Order</p>
+        <h1>Tell us where to bring your Burbish order.</h1>
+        <p>Choose items, add delivery notes, and continue to the secure payment page. The shop can confirm final price, timing, and delivery availability.</p>
+      </div>
+    </header>
+
+    <main class="flow-section">
+      <div class="flow-grid">
+        <form class="flow-card" id="orderForm">
+          <h2>Delivery address</h2>
+          <div class="mode-grid">
+            <label>
+              <input type="radio" name="orderMode" value="Delivery" checked>
+              <span>Delivery</span>
+            </label>
+            <label>
+              <input type="radio" name="orderMode" value="Self-Pickup">
+              <span>Self-Pickup</span>
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <div class="wide-field">
+              <span class="field-title">Choose from high-quality item photos</span>
+              <details class="menu-picker" id="menuPicker">
+                <summary>
+                  <img id="selectedItemImage" src="assets/images/gallery-07.jpg" alt="Fresh cocktails">
+                  <span>
+                    <strong id="selectedItemName">Fresh cocktails</strong>
+                    <small id="selectedItemMeta">Cold Drinks</small>
+                  </span>
+                </summary>
+                <div class="picker-options">
+                  <button type="button" data-order-item="Fresh cocktails" data-order-category="Cold Drinks" data-order-image="assets/images/gallery-07.jpg">
+                    <img src="assets/images/gallery-07.jpg" alt="Fresh cocktails">
+                    <span>Fresh cocktails <small>Cold Drinks</small></span>
+                  </button>
+                  <button type="button" data-order-item="Passion fruit blend" data-order-category="Refreshers" data-order-image="assets/images/gallery-06.jpg">
+                    <img src="assets/images/gallery-06.jpg" alt="Passion fruit blend">
+                    <span>Passion fruit blend <small>Refreshers</small></span>
+                  </button>
+                  <button type="button" data-order-item="Waffle plate" data-order-category="Sweet" data-order-image="assets/images/gallery-05.jpg">
+                    <img src="assets/images/gallery-05.jpg" alt="Waffle plate">
+                    <span>Waffle plate <small>Sweet</small></span>
+                  </button>
+                  <button type="button" data-order-item="Hot skillet plate" data-order-category="Lunch" data-order-image="assets/images/gallery-02.jpg">
+                    <img src="assets/images/gallery-02.jpg" alt="Hot skillet plate">
+                    <span>Hot skillet plate <small>Lunch</small></span>
+                  </button>
+                </div>
+              </details>
+            </div>
+
+            <label>
+              <span>Name</span>
+              <input type="text" name="customerName" placeholder="Your name">
+            </label>
+            <label>
+              <span>Phone</span>
+              <input type="tel" name="customerPhone" placeholder="+971">
+            </label>
+            <label>
+              <span>Area</span>
+              <input type="text" name="customerArea" placeholder="Al Dhafrah, Corniche, etc.">
+            </label>
+            <label>
+              <span>Building / villa</span>
+              <input type="text" name="customerBuilding" placeholder="Building name or villa number">
+            </label>
+            <label class="wide-field">
+              <span>Full address</span>
+              <input type="text" name="customerAddress" placeholder="Street, floor, apartment, nearby landmark">
+            </label>
+            <label class="wide-field">
+              <span>Order items</span>
+              <textarea name="orderItems" rows="4" placeholder="Add quantities or extra items"></textarea>
+            </label>
+            <label class="wide-field">
+              <span>Delivery instructions and adjustments</span>
+              <textarea name="orderNotes" rows="4" placeholder="No sugar, less ice, allergy notes, call on arrival, parking instructions"></textarea>
+            </label>
+          </div>
+
+          <div class="order-actions">
+            <button class="button primary" type="button" id="prepareOrder">Prepare delivery order</button>
+            <a class="button secondary" id="whatsappOrder" href="https://wa.me/971501212460" target="_blank" rel="noreferrer">Send to WhatsApp</a>
+            <a class="button ghost" href="payment.html" data-smooth-page>Continue to payment</a>
+          </div>
+        </form>
+
+        <aside class="flow-card">
+          <h3>Delivery instructions</h3>
+          <p>Share the most precise address possible. Include building name, floor, apartment or villa number, and a landmark. Final delivery time and fee should be confirmed by the shop.</p>
+          <div class="checkout-card">
+            <strong>Prepared order</strong>
+            <p id="orderSummary">Choose an item and prepare the delivery order to see the summary here.</p>
+          </div>
+          <div class="map-actions">
+            <a class="button primary" href="https://www.google.com/maps/search/?api=1&amp;query=24.4849389,54.3823427" target="_blank" rel="noreferrer">Google Maps</a>
+            <a class="button secondary" href="https://waze.com/ul?ll=24.4849389,54.3823427&amp;navigate=yes" target="_blank" rel="noreferrer">Waze</a>
+            <a class="button ghost" href="https://maps.apple.com/?ll=24.4849389,54.3823427&amp;q=Burbish%20Coffee%20Shop" target="_blank" rel="noreferrer">Apple Maps</a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="delivery-guide">
+        <article>
+          <h3>1. Choose</h3>
+          <p>Pick an item from the photo dropdown and add quantities or comments.</p>
+        </article>
+        <article>
+          <h3>2. Confirm</h3>
+          <p>Send the prepared order through WhatsApp or continue to the payment page.</p>
+        </article>
+        <article>
+          <h3>3. Pay</h3>
+          <p>Use the secure payment page for Visa, Mastercard, Apple Pay, or Google Pay.</p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <p>Burbish Coffee Shop</p>
+        <small>Delivery flow</small>
+      </div>
+    </footer>
+  </body>
+</html>
