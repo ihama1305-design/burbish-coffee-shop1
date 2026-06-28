@@ -5,24 +5,14 @@ const dialog = document.querySelector("#menuDialog");
 const dialogImage = document.querySelector("#dialogImage");
 const dialogTitle = document.querySelector("#menuDialogTitle");
 const dialogClose = document.querySelector(".dialog-close");
-const dialogTools = Array.from(document.querySelectorAll(".dialog-tool"));
-let menuZoom = 1;
 
-function setDialogMode(mode) {
-  if (!dialogImage) return;
+function setMenuOrientation() {
+  if (!dialog || !dialogImage) return;
 
-  dialogImage.classList.remove("fit-height", "fit-width", "zoomed");
-  dialogImage.classList.add(mode);
-
-  dialogTools.forEach((tool) => {
-    tool.classList.toggle("is-active", tool.dataset.fit && mode === `fit-${tool.dataset.fit}`);
-  });
-}
-
-function setMenuZoom(nextZoom) {
-  menuZoom = Math.min(1.85, Math.max(0.85, nextZoom));
-  dialogImage.style.setProperty("--menu-zoom", menuZoom.toFixed(2));
-  setDialogMode("zoomed");
+  const isLandscape = dialogImage.naturalWidth > dialogImage.naturalHeight;
+  dialog.classList.toggle("is-landscape", isLandscape);
+  dialogImage.classList.toggle("is-landscape", isLandscape);
+  dialogImage.classList.toggle("is-portrait", !isLandscape);
 }
 
 if (sectionSelect) {
@@ -91,9 +81,8 @@ document.querySelectorAll("[data-menu-image]").forEach((button) => {
     dialogImage.src = source;
     dialogImage.alt = title;
     dialogTitle.textContent = title;
-    menuZoom = 1;
-    dialogImage.style.setProperty("--menu-zoom", "1");
-    setDialogMode("fit-height");
+    dialog.classList.remove("is-landscape");
+    dialogImage.classList.remove("is-landscape", "is-portrait");
 
     if (typeof dialog.showModal === "function") {
       dialog.showModal();
@@ -103,20 +92,25 @@ document.querySelectorAll("[data-menu-image]").forEach((button) => {
   });
 });
 
-dialogTools.forEach((tool) => {
-  tool.addEventListener("click", () => {
-    if (tool.dataset.fit) {
-      menuZoom = 1;
-      dialogImage.style.setProperty("--menu-zoom", "1");
-      setDialogMode(`fit-${tool.dataset.fit}`);
-    }
+if (dialogImage) {
+  dialogImage.addEventListener("load", setMenuOrientation);
+}
 
-    if (tool.dataset.zoom === "in") {
-      setMenuZoom(menuZoom + 0.15);
-    }
+document.querySelectorAll(".menu-page").forEach((button) => {
+  button.addEventListener("mousemove", (event) => {
+    const image = button.querySelector("img");
+    if (!image) return;
 
-    if (tool.dataset.zoom === "out") {
-      setMenuZoom(menuZoom - 0.15);
+    const rect = button.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    image.style.transformOrigin = `${x}% ${y}%`;
+  });
+
+  button.addEventListener("mouseleave", () => {
+    const image = button.querySelector("img");
+    if (image) {
+      image.style.transformOrigin = "center top";
     }
   });
 });
@@ -135,7 +129,7 @@ if (dialog) {
   dialog.addEventListener("close", () => {
     dialogImage.removeAttribute("src");
     dialogImage.alt = "";
-    dialogImage.removeAttribute("style");
-    menuZoom = 1;
+    dialog.classList.remove("is-landscape");
+    dialogImage.classList.remove("is-landscape", "is-portrait");
   });
 }
