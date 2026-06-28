@@ -39,14 +39,14 @@
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
     <div class="utility-bar" aria-label="Quick contact">
       <div class="utility-inner">
-        <a href="tel:+971501212460">Call Us</a>
-        <a href="https://wa.me/971501212460" target="_blank" rel="noreferrer">Message Us</a>
+        <a href="tel:+971501212460" data-i18n="utility.call">Call Us</a>
+        <a href="https://wa.me/971501212460" target="_blank" rel="noreferrer" data-i18n="utility.message">Message Us</a>
       </div>
-      <p>Open daily 8am - 2am</p>
+      <p data-i18n="utility.hours">Open daily 8am - 2am</p>
     </div>
 
     <nav class="site-nav" aria-label="Primary navigation">
@@ -56,29 +56,96 @@
       </a>
 
       <div class="nav-links" aria-label="Section links">
-        <a href="#story">Story</a>
-        <a href="#atmosphere">Atmosphere</a>
-        <a href="#signature">Best Picks</a>
-        <a href="#menu">Menu</a>
-        <a href="#location">Location</a>
-        <a href="#contact">Contact</a>
-        <a href="#reviews">Reviews</a>
+        <a href="#story" data-i18n="nav.story">Story</a>
+        <a href="#atmosphere" data-i18n="nav.atmosphere">Atmosphere</a>
+        <a href="#signature" data-i18n="nav.signature">Best Picks</a>
+        <a href="#menu" data-i18n="nav.menu">Menu</a>
+        <a href="#order" data-i18n="nav.order">Order</a>
+        <a href="#location" data-i18n="nav.location">Location</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
       </div>
 
-      <label class="jump-control">
-        <span>Go to</span>
-        <select id="sectionSelect" aria-label="Jump to website section">
-          <option value="#home">Home</option>
-          <option value="#story">Story</option>
-          <option value="#atmosphere">Atmosphere</option>
-          <option value="#signature">Best Picks</option>
-          <option value="#menu">Menu</option>
-          <option value="#location">Location</option>
-          <option value="#contact">Contact</option>
-          <option value="#reviews">Reviews</option>
-        </select>
-      </label>
+      <div class="nav-controls">
+        <button class="drawer-trigger" type="button" aria-label="Open site pages" aria-controls="brandDrawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="language-toggle" aria-label="Language">
+          <button class="language-option is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="language-option" type="button" data-lang="ar" aria-pressed="false">AR</button>
+        </div>
+
+        <label class="jump-control">
+          <span data-i18n="nav.goto">Go to</span>
+          <select id="sectionSelect" aria-label="Jump to website section">
+            <option value="#home" data-i18n="select.home">Home</option>
+            <option value="#story" data-i18n="select.story">Story</option>
+            <option value="#atmosphere" data-i18n="select.atmosphere">Atmosphere</option>
+            <option value="#signature" data-i18n="select.signature">Best Picks</option>
+            <option value="#menu" data-i18n="select.menu">Menu</option>
+            <option value="#order" data-i18n="select.order">Order</option>
+            <option value="#brand-pages" data-i18n="select.pages">Pages</option>
+            <option value="#location" data-i18n="select.location">Location</option>
+            <option value="#contact" data-i18n="select.contact">Contact</option>
+            <option value="#reviews" data-i18n="select.reviews">Reviews</option>
+          </select>
+        </label>
+      </div>
     </nav>
+
+    <div class="service-strip" aria-label="Order type shortcuts">
+      <button class="service-mode is-active" type="button" data-service-mode="Delivery">
+        <span class="mode-icon">DL</span>
+        <span data-i18n="service.delivery">Delivery</span>
+      </button>
+      <button class="service-mode" type="button" data-service-mode="Self-Pickup">
+        <span class="mode-icon">PU</span>
+        <span data-i18n="service.pickup">Self-Pickup</span>
+      </button>
+      <button class="service-mode" type="button" data-service-mode="Dine-In">
+        <span class="mode-icon">DI</span>
+        <span data-i18n="service.dinein">Dine-In</span>
+      </button>
+      <button class="service-mode" type="button" data-service-mode="Drive-Thru">
+        <span class="mode-icon">DT</span>
+        <span data-i18n="service.drive">Drive-Thru</span>
+      </button>
+      <button class="service-location" type="button" data-page-target="stores">
+        <span data-i18n="service.location">Select location</span>
+        <small data-i18n="service.locationSub">Al Dhafrah, Abu Dhabi</small>
+      </button>
+      <button class="cart-button" type="button" data-page-target="history" aria-label="Open order history">
+        <span>0</span>
+      </button>
+      <button class="login-button" type="button" data-page-target="history" data-i18n="service.login">Login</button>
+    </div>
+
+    <div class="drawer-backdrop" data-drawer-close hidden></div>
+    <aside class="brand-drawer" id="brandDrawer" aria-label="Brand pages" aria-hidden="true">
+      <div class="drawer-head">
+        <div>
+          <strong>Burbish</strong>
+          <small data-i18n="drawer.subtitle">Coffee shop pages</small>
+        </div>
+        <button class="drawer-close" type="button" data-drawer-close aria-label="Close site pages">Close</button>
+      </div>
+      <nav class="drawer-menu" aria-label="Additional website pages">
+        <a href="#brand-pages" data-page-target="party"><span class="drawer-icon">PO</span><span data-i18n="drawer.party">Party Order</span><b data-i18n="drawer.new">NEW</b></a>
+        <a href="#brand-pages" data-page-target="stores"><span class="drawer-icon">SL</span><span data-i18n="drawer.stores">Store Locations</span></a>
+        <a href="#brand-pages" data-page-target="track"><span class="drawer-icon">TO</span><span data-i18n="drawer.track">Track Order</span></a>
+        <a href="#brand-pages" data-page-target="history"><span class="drawer-icon">OH</span><span data-i18n="drawer.history">Order History</span></a>
+        <a href="#brand-pages" data-page-target="offers"><span class="drawer-icon">OF</span><span data-i18n="drawer.offers">Offers</span></a>
+        <a href="#menu"><span class="drawer-icon">EM</span><span data-i18n="drawer.menu">Explore Menu</span></a>
+        <a href="#brand-pages" data-page-target="feedback"><span class="drawer-icon">FB</span><span data-i18n="drawer.feedback">Feedback</span></a>
+        <a href="#brand-pages" data-page-target="faq"><span class="drawer-icon">FQ</span><span data-i18n="drawer.faq">FAQ</span></a>
+        <a href="#brand-pages" data-page-target="terms"><span class="drawer-icon">TC</span><span data-i18n="drawer.terms">Terms & Conditions</span></a>
+        <a href="#brand-pages" data-page-target="privacy"><span class="drawer-icon">PP</span><span data-i18n="drawer.privacy">Privacy Policy</span></a>
+        <a href="#brand-pages" data-page-target="cookies"><span class="drawer-icon">CP</span><span data-i18n="drawer.cookies">Cookie Policy</span></a>
+      </nav>
+    </aside>
 
     <header class="hero section" id="home">
       <img
@@ -88,28 +155,29 @@
       >
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-content">
-        <p class="eyebrow">Al Dhafrah, Abu Dhabi</p>
-        <h1>Burbish Coffee Shop <span>بربيش كوفي شوب</span></h1>
-        <p>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Al Dhafrah, Abu Dhabi</p>
+        <h1 data-i18n-html="hero.title">Burbish Coffee Shop <span>بربيش كوفي شوب</span></h1>
+        <p data-i18n="hero.copy">
           A calm Salam Street cafe shaped for easy mornings, relaxed conversations,
           fresh drinks, and simple comfort food.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#menu">View menu</a>
-          <a class="button secondary" href="tel:+971501212460">Call the shop</a>
+          <a class="button primary" href="#menu" data-i18n="hero.viewMenu">View menu</a>
+          <a class="button secondary" href="#order" data-i18n="hero.order">Order delivery</a>
+          <a class="button secondary" href="tel:+971501212460" data-i18n="hero.call">Call the shop</a>
         </div>
       </div>
       <dl class="hero-facts" aria-label="Quick business details">
         <div>
-          <dt>Open</dt>
-          <dd>8am - 2am</dd>
+          <dt data-i18n="facts.open">Open</dt>
+          <dd data-i18n="facts.hours">8am - 2am</dd>
         </div>
         <div>
-          <dt>Area</dt>
-          <dd>Al Dhafrah</dd>
+          <dt data-i18n="facts.area">Area</dt>
+          <dd data-i18n="facts.areaValue">Al Dhafrah</dd>
         </div>
         <div>
-          <dt>Phone</dt>
+          <dt data-i18n="facts.phone">Phone</dt>
           <dd><a href="tel:+971501212460">+971501212460</a></dd>
         </div>
       </dl>
@@ -318,6 +386,221 @@
               <img src="assets/images/menu-06.jpg" alt="Burbish hot beverages menu page" loading="lazy" decoding="async">
               <span>Hot drinks</span>
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section order-section reveal" id="order">
+        <div class="section-intro menu-intro">
+          <div>
+            <p class="eyebrow" data-i18n="order.eyebrow">Order & Pay</p>
+            <h2 data-i18n="order.title">Delivery, pickup, and secure payments.</h2>
+            <p data-i18n="order.copy">
+              Choose how you want your Burbish order, share the delivery details,
+              and use a secure hosted payment link for cards and wallets.
+            </p>
+          </div>
+          <a class="text-link" href="https://wa.me/971501212460" target="_blank" rel="noreferrer" data-i18n="order.whatsapp">Order on WhatsApp</a>
+        </div>
+
+        <div class="order-workspace">
+          <form class="order-form" id="orderForm">
+            <div class="form-head">
+              <h3 data-i18n="order.formTitle">Build a quick order</h3>
+              <p data-i18n="order.formCopy">This prepares the order request. Live card payment should be completed through a PCI-compliant gateway page.</p>
+            </div>
+
+            <div class="mode-grid" aria-label="Order method">
+              <label>
+                <input type="radio" name="orderMode" value="Delivery" checked>
+                <span data-i18n="order.modeDelivery">Delivery</span>
+              </label>
+              <label>
+                <input type="radio" name="orderMode" value="Self-Pickup">
+                <span data-i18n="order.modePickup">Self-Pickup</span>
+              </label>
+              <label>
+                <input type="radio" name="orderMode" value="Dine-In">
+                <span data-i18n="order.modeDine">Dine-In</span>
+              </label>
+              <label>
+                <input type="radio" name="orderMode" value="Drive-Thru">
+                <span data-i18n="order.modeDrive">Drive-Thru</span>
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                <span data-i18n="order.name">Name</span>
+                <input type="text" name="customerName" placeholder="Your name">
+              </label>
+              <label>
+                <span data-i18n="order.phone">Phone</span>
+                <input type="tel" name="customerPhone" placeholder="+971">
+              </label>
+              <label class="wide-field">
+                <span data-i18n="order.address">Delivery address</span>
+                <input type="text" name="customerAddress" placeholder="Building, street, area">
+              </label>
+              <label class="wide-field">
+                <span data-i18n="order.items">Order items</span>
+                <textarea name="orderItems" rows="4" placeholder="Example: 2 fresh cocktails, 1 waffle plate"></textarea>
+              </label>
+            </div>
+
+            <div class="payment-options" aria-label="Payment methods">
+              <button class="payment-option is-active" type="button" data-payment="Visa through secure checkout">Visa</button>
+              <button class="payment-option" type="button" data-payment="Mastercard through secure checkout">Mastercard</button>
+              <button class="payment-option" type="button" data-payment="Apple Pay">Apple Pay</button>
+              <button class="payment-option" type="button" data-payment="Google Pay">Google Pay</button>
+              <button class="payment-option" type="button" data-payment="Cash on delivery" data-i18n="order.cash">Cash</button>
+            </div>
+
+            <div class="order-actions">
+              <button class="button primary" type="button" id="prepareOrder" data-i18n="order.prepare">Prepare order</button>
+              <a class="button secondary" id="whatsappOrder" href="https://wa.me/971501212460" target="_blank" rel="noreferrer" data-i18n="order.sendWhatsApp">Send via WhatsApp</a>
+            </div>
+          </form>
+
+          <aside class="payment-panel">
+            <p class="eyebrow" data-i18n="payment.eyebrow">Payments</p>
+            <h3 data-i18n="payment.title">Accept major cards and wallets.</h3>
+            <p data-i18n="payment.copy">
+              Card payments should redirect customers to a hosted checkout page from
+              Stripe, PayTabs, Telr, Network, or your bank payment-link provider.
+            </p>
+            <div class="payment-badges" aria-label="Accepted payments">
+              <span>Visa</span>
+              <span>Mastercard</span>
+              <span>Apple Pay</span>
+              <span>Google Pay</span>
+              <span>Cash</span>
+            </div>
+            <div class="checkout-card">
+              <strong data-i18n="payment.summaryTitle">Order summary</strong>
+              <p id="orderSummary" data-i18n="payment.summaryEmpty">Select a service mode and prepare an order to see the summary here.</p>
+              <a class="button primary" href="https://wa.me/971501212460" target="_blank" rel="noreferrer" data-i18n="payment.checkout">Request secure checkout link</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section brand-pages-section reveal" id="brand-pages">
+        <div class="section-intro menu-intro">
+          <div>
+            <p class="eyebrow" data-i18n="pages.eyebrow">Brand Pages</p>
+            <h2 data-i18n="pages.title">Explore every part of Burbish.</h2>
+            <p data-i18n="pages.copy">Use the sidebar or the buttons below to move through offers, party orders, tracking, policies, and customer support pages.</p>
+          </div>
+        </div>
+
+        <div class="page-shell">
+          <div class="page-tabs" aria-label="Brand page tabs">
+            <button class="page-tab is-active" type="button" data-page-target="offers" data-i18n="drawer.offers">Offers</button>
+            <button class="page-tab" type="button" data-page-target="party" data-i18n="drawer.party">Party Order</button>
+            <button class="page-tab" type="button" data-page-target="stores" data-i18n="drawer.stores">Store Locations</button>
+            <button class="page-tab" type="button" data-page-target="track" data-i18n="drawer.track">Track Order</button>
+            <button class="page-tab" type="button" data-page-target="faq" data-i18n="drawer.faq">FAQ</button>
+          </div>
+
+          <div class="page-panels">
+            <article class="page-panel is-active" data-page="offers">
+              <p class="eyebrow" data-i18n="offers.eyebrow">Special Offers</p>
+              <h3 data-i18n="offers.title">Bright cafe deals for dine-in and delivery.</h3>
+              <div class="offer-grid">
+                <div>
+                  <span data-i18n="offers.badge1">Morning</span>
+                  <strong data-i18n="offers.card1">Coffee + breakfast plate</strong>
+                  <p data-i18n="offers.card1Copy">A simple weekday combo built for quick starts.</p>
+                </div>
+                <div>
+                  <span data-i18n="offers.badge2">Evening</span>
+                  <strong data-i18n="offers.card2">Fresh drink bundle</strong>
+                  <p data-i18n="offers.card2Copy">Mix cocktails, juices, and milkshakes for groups.</p>
+                </div>
+                <div>
+                  <span data-i18n="offers.badge3">Dessert</span>
+                  <strong data-i18n="offers.card3">Waffle share plate</strong>
+                  <p data-i18n="offers.card3Copy">A sweet plate designed for relaxed visits.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="page-panel" data-page="party" hidden>
+              <p class="eyebrow" data-i18n="party.eyebrow">Party Order</p>
+              <h3 data-i18n="party.title">Plan drinks and cafe trays for groups.</h3>
+              <p data-i18n="party.copy">Send the date, guest count, and preferred menu items. The shop can confirm availability and prepare a custom quote.</p>
+              <a class="button primary" href="https://wa.me/971501212460?text=Hello%20Burbish%2C%20I%20want%20to%20ask%20about%20a%20party%20order." target="_blank" rel="noreferrer" data-i18n="party.cta">Start party request</a>
+            </article>
+
+            <article class="page-panel" data-page="stores" hidden>
+              <p class="eyebrow" data-i18n="stores.eyebrow">Store Locations</p>
+              <h3 data-i18n="stores.title">Al Dhafrah, Abu Dhabi.</h3>
+              <p data-i18n="stores.copy">Near Telecommunication Regulatory Authority, Salam Street. Open daily from 8am to 2am.</p>
+              <a class="button primary" href="https://www.google.com/maps/search/?api=1&amp;query=24.4849389,54.3823427" target="_blank" rel="noreferrer" data-i18n="stores.cta">Open map</a>
+            </article>
+
+            <article class="page-panel" data-page="track" hidden>
+              <p class="eyebrow" data-i18n="track.eyebrow">Track Order</p>
+              <h3 data-i18n="track.title">Check your latest order status.</h3>
+              <form class="mini-form">
+                <label>
+                  <span data-i18n="track.label">Order or phone number</span>
+                  <input type="text" placeholder="BUR-1024 or +971">
+                </label>
+                <button class="button primary" type="button" id="trackOrder" data-i18n="track.cta">Track order</button>
+              </form>
+              <p class="status-note" id="trackStatus" data-i18n="track.note">Orders placed through WhatsApp are confirmed by the shop directly.</p>
+            </article>
+
+            <article class="page-panel" data-page="history" hidden>
+              <p class="eyebrow" data-i18n="history.eyebrow">Order History</p>
+              <h3 data-i18n="history.title">Your browser order history.</h3>
+              <p data-i18n="history.copy">Prepared orders from this browser will appear here once connected to a real ordering backend.</p>
+            </article>
+
+            <article class="page-panel" data-page="feedback" hidden>
+              <p class="eyebrow" data-i18n="feedback.eyebrow">Feedback</p>
+              <h3 data-i18n="feedback.title">Tell the shop about your visit.</h3>
+              <form class="mini-form">
+                <label>
+                  <span data-i18n="feedback.label">Your message</span>
+                  <textarea rows="4" placeholder="Share your feedback"></textarea>
+                </label>
+                <button class="button primary" type="button" data-i18n="feedback.cta">Prepare feedback</button>
+              </form>
+            </article>
+
+            <article class="page-panel" data-page="faq" hidden>
+              <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+              <h3 data-i18n="faq.title">Quick answers before ordering.</h3>
+              <details open>
+                <summary data-i18n="faq.q1">Do you deliver?</summary>
+                <p data-i18n="faq.a1">Use WhatsApp or a connected delivery partner once live ordering is configured.</p>
+              </details>
+              <details>
+                <summary data-i18n="faq.q2">Can I pay by card?</summary>
+                <p data-i18n="faq.a2">Yes, after a secure payment gateway is connected. The site is prepared for hosted checkout links.</p>
+              </details>
+            </article>
+
+            <article class="page-panel" data-page="terms" hidden>
+              <p class="eyebrow" data-i18n="terms.eyebrow">Terms</p>
+              <h3 data-i18n="terms.title">Ordering terms.</h3>
+              <p data-i18n="terms.copy">Prices, availability, delivery areas, and preparation times should be confirmed by Burbish Coffee Shop before payment.</p>
+            </article>
+
+            <article class="page-panel" data-page="privacy" hidden>
+              <p class="eyebrow" data-i18n="privacy.eyebrow">Privacy</p>
+              <h3 data-i18n="privacy.title">Customer information.</h3>
+              <p data-i18n="privacy.copy">Customer details entered here are not sent to a server unless connected to a real backend or shared through WhatsApp.</p>
+            </article>
+
+            <article class="page-panel" data-page="cookies" hidden>
+              <p class="eyebrow" data-i18n="cookies.eyebrow">Cookies</p>
+              <h3 data-i18n="cookies.title">Cookie policy.</h3>
+              <p data-i18n="cookies.copy">This static site does not require tracking cookies. A future ordering system may use secure session cookies.</p>
+            </article>
           </div>
         </div>
       </section>
